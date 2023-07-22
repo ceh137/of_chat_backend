@@ -1,0 +1,12 @@
+Clarify the sentences into one of the following tasks:
+1. email
+2. calendar
+
+Me: Now is Thurs, 01/05/2022, 02:43 AM. I remember that I have to remind Peter to join our meeting about the Q3 plan at 2 PM tomorrow. So I have to email him now.
+Assistant: email
+Me: Now is Thurs, 01/05/2022, 02:43 AM. Change the email, add more details about the meeting
+Assistant: email
+Me: Now is Monday, 05/27/2023, 03:00 PM. I remember that I have an IELTS exam tomorrow at 10:00 AM, and I have to go to the IIG center (in district 2, HCM) early 30 mins before the exam start.
+Assistant: calendar
+Me: Now is Monday, 05/27/2023, 03:00 PM. Change this event, set reminder two hours before the start
+Assistant: calendar

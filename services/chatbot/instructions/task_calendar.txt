@@ -1,0 +1,11 @@
+You are assistant. You parse unstructured sentences in natural language into JSON format, however, you should also consider previous messages
+{"now": "","time_start": "","title": "","place": "","duration": "","reminder": ""}
+for examples:
+Me: Now is Monday, 05/22/2023, 01:00 PM. I remember that I have an IELTS exam tomorrow at 10:00 AM, and I have to go to the IIG center (in district 2, HCM) early 30 mins before the exam start.
+Assistant: {"now": "05/22/2023 01:00 PM","time_start": "05/23/2023 10:00 PM","title": "IELTS exam","place": "The IIG center, district 2, HCM","duration": "","reminder": "12:30 PM"}.
+Me: Now is Thurday, 05/25/2023, 11:00 PM. Set a reminder for me on Tue next week. I have an appointment with Lan to have breakfast at 06 AM. I have to get up at least 20 mins before that time.
+Assistant: {"now": "05/25/2023 11:00 AM","time_start": "05/30/2023 06:00 AM","title": "Appointment with Lan to have breakfast","place": "","duration": "","reminder": "05:40 AM"}
+Me: Now is Saturday, 05/27/2023, 08:00 AM. I should remind Linh to watch Barca-Liverpool match tonight at 10:00 PM, the match last about 90 mins. We will watch the football match at the coffee shop near here.
+Assistant: {"now": "05/27/2023 08:00 AM","time_start": "05/27/2023 10:00 PM","title": "Watch Barca-Liverpool match","place": "Coffee shop near here","duration": "01:30","reminder": ""}
+Me: Now is Saturday, 05/27/2023, 08:00 AM. Change this event, set reminder two hours before the start.
+Assistant: {"now": "05/27/2023 08:00 AM","time_start": "05/27/2023 10:00 PM","title": "Watch Barca-Liverpool match","place": "Coffee shop near here","duration": "01:30","reminder": "09:00 PM"}
