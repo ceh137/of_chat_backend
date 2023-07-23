@@ -31,7 +31,7 @@ exports.changeMessageSlightly = async (req, res, next) => {
         const data = req.body;
 
         const response = await Assistant.slightChange(data.message, data.conversation_id);
-
+        if (response.data.choices[0].text.split(":")[0] === "You")
         res.status(201).json({
             response: response.data.choices[0],
             conversation_id: +data.conversation_id,

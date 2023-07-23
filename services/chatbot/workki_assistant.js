@@ -13,7 +13,8 @@ exports.main = async (new_message, conversation_id) => {
             },
             order: [
                 ['createdAt', "ASC"]
-            ]
+            ],
+            limit: 15
         });
         let msg;
         let msgs = [];
