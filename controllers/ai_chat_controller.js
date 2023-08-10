@@ -19,6 +19,12 @@ exports.addMessage = async (req, res, next) => {
                 UserId: +data.userId
             }
         });
+        if (!wallet) {
+            return res.status(404).json({
+                message: "Could not find wallet"
+            })
+        }
+
         if (wallet && +wallet.balance <= 0) {
             return res.status(401).json({
                 balance: wallet.balance,
