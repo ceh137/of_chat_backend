@@ -10,8 +10,10 @@ const aiChatRoutes = require('./routes/ai_chat');
 const authRoutes = require("./routes/auth")
 const paymentRoutes = require("./routes/payments")
 
+
 app.use(cors())
 app.options("*", cors())
+
 
 app.use(bodyParser.json({
     verify: (req, res, buf) => {
