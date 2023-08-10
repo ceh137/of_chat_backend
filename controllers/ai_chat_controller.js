@@ -13,12 +13,13 @@ exports.addMessage = async (req, res, next) => {
 
     try {
         const data = req.body;
+
         const wallet = await Wallet.findOne({
             where: {
                 UserId: +data.userId
             }
         });
-        if (+wallet.balance <= 0) {
+        if (wallet && +wallet.balance <= 0) {
             return res.status(401).json({
                 balance: wallet.balance,
                 status: "not_enough_balance",

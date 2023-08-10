@@ -16,8 +16,15 @@
   "production": {
     "username": "postgres",
     "password": "12345678",
-    "database": "of_chat",
-    "host": "localhost",
-    "dialect": "postgres"
+    "database": "bd_of_chat",
+    "host": "bd-of-chat.cc8gtojxmzbc.eu-north-1.rds.amazonaws.com",
+    "dialect": "postgres",
+    "dialectOptions": {
+      "ssl": {
+        "require": true,
+        "rejectUnauthorized": false
+      }
+    }
   }
+
 }
