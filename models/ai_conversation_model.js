@@ -18,6 +18,10 @@ AiConversation.init({
         type: DataTypes.BIGINT,
         allowNull: false,
     },
+    onlyFansSenderId: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
     UserId: {
         type: DataTypes.BIGINT,
         allowNull: false,

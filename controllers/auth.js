@@ -4,10 +4,12 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const validator = require("email-validator");
 const {sendVerificationEmail} = require("../services/sendgrid");
+const sequelize = require("../utils/db");
+const Wallet = require("../models/wallet");
 const  dotenv = require('dotenv').config()
 
 
-exports.signup = (req, res, next) => {
+exports.signup = async (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty() && !res.headersSent) {
         console.log(errors)
@@ -16,52 +18,59 @@ exports.signup = (req, res, next) => {
         });
 
     }
+    try {
 
-    const email = req.body.email;
-    const password = req.body.password;
-    const username = req.body.email;
+        const email = req.body.email;
+        const password = req.body.password;
+        const username = req.body.email;
 
-    bcrypt.hash(password, 10)
-        .then(async hashedPw => {
-            try {
-                return await User.create({
-                    email: email,
-                    username: username,
-                    verified: false,
-                    password: hashedPw,
-                })
-            } catch (e) {
-                console.log(e)
-                if (!res.headersSent) {
-                    res.status(401).json({
-                        message: 'Error creating your account'
-                    });
-                }
-            }
-
-        })
-        .then(user => {
-            const token = jwt.sign({
-                userId: user.id,
-                email: user.email.trim()
-            }, 'somehypersecretthing', {expiresIn: '24h'})
+        const hashedPw = bcrypt.hash(password, 10)
+        let user ;
+        let wallet;
+        const t = await sequelize.transaction()
+        try {
+            user = await User.create({
+                email: email,
+                username: username,
+                verified: false,
+                password: await hashedPw,
+            }, {transaction: t})
+            wallet = await Wallet.create({
+                balance:0,
+                UserId: user.id,
+            }, {transaction: t})
+            t.commit()
+        } catch (e) {
+            t.rollback()
+            console.log(e)
             if (!res.headersSent) {
-                res.status(201).json({
-                    token: token,
-                    userId: user.id,
-                    verified: user.verified,
-                    expiresIn: 24 * 60 * 60 * 1000,
-                    email: user.email
-                })
-            }
-        })
-        .catch(err => {
-            if (!res.headersSent) {
-                res.status(500).send({
-                    message: 'Error has occured'
+                return res.status(401).json({
+                    message: 'Error creating your account'
                 });
             }
-    })
+        }
+
+        const token = jwt.sign({
+            userId: user.id,
+            email: user.email.trim()
+        }, 'somehypersecretthing', {expiresIn: '24h'})
+        if (!res.headersSent) {
+            res.status(201).json({
+                token: token,
+                userId: user.id,
+                verified: user.verified,
+                expiresIn: 24 * 60 * 60 * 1000,
+                email: user.email
+            })
+        }
+
+    } catch (e) {
+            console.log(e)
+            res.status(500).send({
+                message: 'Error has occured'
+            });
+    }
+
 }
 
 exports.login = async (req, res, next) => {

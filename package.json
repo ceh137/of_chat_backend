@@ -22,10 +22,14 @@
     "express-validator": "^7.0.1",
     "install": "^0.13.0",
     "jsonwebtoken": "^9.0.1",
+    "mailersend": "^2.2.0",
+    "mailtrap": "^3.1.1",
     "node-mailjet": "^6.0.3",
+    "nodemailer": "^6.9.4",
     "npm": "^9.8.0",
     "openai": "^3.3.0",
     "pg": "^8.11.1",
+    "sendmail": "^1.6.1",
     "sequelize": "^6.32.1"
   },
   "devDependencies": {

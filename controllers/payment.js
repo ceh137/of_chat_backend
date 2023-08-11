@@ -98,7 +98,7 @@ exports.getBalance = async (req, res, next) => {
 
         if (wallet) {
             return res.status(200).json({
-                balance: wallet.balance
+                balance: wallet.balance.toFixed(2)
             })
         }
         return res.status(404).json({
