@@ -1,9 +1,13 @@
 # Backend for AI Chatting Chrome Extension
 
+This app (with Vue.js frontend) was created for providing assistance when people were chatting on pay-per-message platforms.
+
 **Tech stack and main packages**
 - Node.js
 - Express.js
 - Sequelize
+- Postgres
+- Hosted on AWS
 
 ## Endpoints
 
